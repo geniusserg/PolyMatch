@@ -103,8 +103,9 @@ describe('Game Logic', () => {
       
       const { newState, matches } = updateBetPrices(stateWithBet, prices);
       
-      expect(newState.bets[0].currentPrice).toBe(70);
-      expect(newState.bets[0].profitLoss).toBeGreaterThan(0);
+      // Bet is resolved and moved to resolvedBets on match
+      expect(newState.resolvedBets[0].currentPrice).toBe(70);
+      expect(newState.resolvedBets[0].profitLoss).toBeGreaterThan(0);
       expect(matches).toHaveLength(1); // Should trigger match (>5 cents move)
     });
 
@@ -178,7 +179,7 @@ describe('Game Logic', () => {
       
       const { newState } = updateBetPrices(stateWithBet, prices);
       
-      expect(newState.bets[0].isResolved).toBe(true);
+      expect(newState.resolvedBets[0].isResolved).toBe(true);
       expect(newState.resolvedBets).toHaveLength(1);
     });
   });
